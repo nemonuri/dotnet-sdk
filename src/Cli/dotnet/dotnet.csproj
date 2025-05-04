@@ -101,17 +101,10 @@
     <!-- Microsoft.Build Package -->
     <PackageReference
       Include="Microsoft.Build"
-      Condition="!Exists('$(MicrosoftBuildDllPath)') And !Exists('$(MicrosoftBuildFrameworkDllPath)') And !Exists('$(MicrosoftNETStringToolsPath)')"/>
-
-    <Reference Include="Microsoft.Build" Condition="Exists('$(MicrosoftBuildDllPath)')">
-      <HintPath>$(MicrosoftBuildDllPath)</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Build" Condition="Exists('$(MicrosoftBuildFrameworkDllPath)')">
-      <HintPath>$(MicrosoftBuildFrameworkDllPath)</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Build" Condition="Exists('$(MicrosoftNETStringToolsPath)')">
-      <HintPath>$(MicrosoftNETStringToolsPath)</HintPath>
-    </Reference>
+      Condition="!Exists('$(MSBuildBuildDirectory)')"/>
+    <Reference Include="$(MSBuildBuildDirectory)Microsoft.Build.dll" Condition="Exists('$(MSBuildBuildDirectory)')" />
+    <Reference Include="$(MSBuildBuildDirectory)Microsoft.Build.Framework.dll" Condition="Exists('$(MSBuildBuildDirectory)')" />
+    <Reference Include="$(MSBuildBuildDirectory)Microsoft.NET.StringTools.dll" Condition="Exists('$(MSBuildBuildDirectory)')" />
     <!-- /Microsoft.Build Package -->
 
     <PackageReference Include="Microsoft.NET.HostModel" />
