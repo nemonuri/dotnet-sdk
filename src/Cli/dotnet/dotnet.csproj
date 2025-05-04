@@ -97,10 +97,23 @@
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" />
     <PackageReference Include="Microsoft.ApplicationInsights" />
-    <PackageReference Include="Microsoft.Build" Condition="!Exists('$(MicrosoftBuildDllPath)')"/>
+
+    <!-- Microsoft.Build Package -->
+    <PackageReference
+      Include="Microsoft.Build"
+      Condition="!Exists('$(MicrosoftBuildDllPath)') And !Exists('$(MicrosoftBuildFrameworkDllPath)') And !Exists('$(MicrosoftNETStringToolsPath)')"/>
+
     <Reference Include="Microsoft.Build" Condition="Exists('$(MicrosoftBuildDllPath)')">
       <HintPath>$(MicrosoftBuildDllPath)</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Build" Condition="Exists('$(MicrosoftBuildFrameworkDllPath)')">
+      <HintPath>$(MicrosoftBuildFrameworkDllPath)</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Build" Condition="Exists('$(MicrosoftNETStringToolsPath)')">
+      <HintPath>$(MicrosoftNETStringToolsPath)</HintPath>
+    </Reference>
+    <!-- /Microsoft.Build Package -->
+
     <PackageReference Include="Microsoft.NET.HostModel" />
     <PackageReference Include="Microsoft.TemplateEngine.Orchestrator.RunnableProjects" />
     <PackageReference Include="System.CommandLine" />
